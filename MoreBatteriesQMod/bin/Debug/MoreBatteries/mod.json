@@ -1,0 +1,12 @@
+﻿{
+  "Id": "MoreBatteriesSnSMGD",
+  "DisplayName": "More Batteries",
+  "Author": "Samuramonge Dev",
+  "Version": "1.0",
+  "Enable": true,
+  "AssemblyName": "MoreBatteries_SN.dll",
+  "VersionDependencies": {
+    "SMLHelper": "2.9.6"
+  },
+  "Game": "Subnautica"
+}
