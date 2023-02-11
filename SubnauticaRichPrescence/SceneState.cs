@@ -10,6 +10,7 @@ namespace DiscordRPCBepInEx
     {
         None,
         Menu,
-        InGame
+        InGame,
+        Loading
     }
 }

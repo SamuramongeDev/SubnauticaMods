@@ -70,29 +70,11 @@
   <ItemGroup>
     <Compile Include="DiscordController.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="Plugins\DiscordGameSKD\ActivityManager.cs" />
-    <Compile Include="Plugins\DiscordGameSKD\Constants.cs" />
-    <Compile Include="Plugins\DiscordGameSKD\Core.cs" />
-    <Compile Include="Plugins\DiscordGameSKD\ImageManager.cs" />
-    <Compile Include="Plugins\DiscordGameSKD\LobbyManager.cs" />
-    <Compile Include="Plugins\DiscordGameSKD\StorageManager.cs" />
-    <Compile Include="Plugins\DiscordGameSKD\StoreManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneState.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="Plugins\x86\discord_game_sdk.dll" />
-    <Content Include="Plugins\x86_64\discord_game_sdk.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Plugins\x86\discord_game_sdk.dll.lib" />
-    <None Include="Plugins\x86_64\discord_game_sdk.bundle" />
-    <None Include="Plugins\x86_64\discord_game_sdk.dll.lib" />
-    <None Include="Plugins\x86_64\discord_game_sdk.dylib" />
-    <None Include="Plugins\x86_64\discord_game_sdk.so" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "C:\Program Files (x86)\Steam\steamapps\common\Subnautica\BepInEx\plugins\$(TargetName)"

@@ -1,6 +1,4 @@
 ﻿using Discord;
-using mset;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,17 +11,7 @@ namespace DiscordRPCBepInEx
         {
             GameObject discordController = new GameObject("DiscordController").AddComponent<DiscordController>().gameObject;
             GameObject.DontDestroyOnLoad(discordController);
-            GetInitialScene();
-        }
-
-        private static void GetInitialScene()
-        {
-            currScene = SceneManager.GetActiveScene().name;
-            if (currScene.ToLower().Contains("startscreen"))
-            {
-                sceneState = SceneState.Menu;
-            }
-
+            SceneInit();
         }
 
         // Unity Normal
@@ -46,7 +34,15 @@ namespace DiscordRPCBepInEx
             UpdatePrescence();
         }
 
-
+        private static void SceneInit()
+        {
+            currScene = SceneManager.GetActiveScene().name;
+            if (currScene.ToLower().Contains("startscreen"))
+            {
+                sceneState = SceneState.Menu;
+            }
+           
+        }
 
         // Main
         private void UpdatePrescence()
@@ -54,7 +50,7 @@ namespace DiscordRPCBepInEx
             if (sceneState == SceneState.Menu)
             {
                 activity.Details = "In Menu";
-                activity.State = ""; 
+                activity.State = "";
                 activity.Assets.LargeImage = "subnauticalogo";
                 activity.Assets.LargeText = "Subnautica";
 
@@ -66,9 +62,9 @@ namespace DiscordRPCBepInEx
                 Vehicle currVehicle = Player.main.GetVehicle();
 
                 biome = Player.main.GetBiomeString().ToLower();
-                biomeDisplay = Utils.GetBiomeDisplayName(biome);
+                biomeDisplay = Utils.GetBiomeDisplayName(Utils.GetBiomeStringForImage(biome));
 
-                activity.Details = $"At The {biome}";
+                activity.Details = $"At The {biomeDisplay}";
 
                 activity.Assets.LargeImage = Utils.GetBiomeStringForImage(biome);
                 activity.Assets.LargeText = biomeDisplay;
@@ -80,7 +76,7 @@ namespace DiscordRPCBepInEx
                     activity.Assets.SmallImage = Utils.GetCurrentSubForImage(currSubString.ToLower());
                     activity.Assets.SmallText = currSubString;
 
-                    if (currSubString == "Base") 
+                    if (currSubString == "Base")
                     {
                         activity.State = $"In Base";
                     }
@@ -96,9 +92,9 @@ namespace DiscordRPCBepInEx
                         string currVehicleString = currVehicle.GetType().Equals(typeof(SeaMoth)) ? "Seamoth" : "Prawn";
 
                         activity.Assets.SmallImage = Utils.GetCurrentSubForImage(currVehicleString.ToLower());
-                        activity.Assets.SmallText = currVehicleString;
+                        activity.Details = currVehicleString;
 
-                        activity.State = $"In {currVehicleString} (At {Mathf.Abs(Mathf.Round(Player.main.GetDepth()))})";
+                        activity.State = $"In {currVehicleString} ({Mathf.Abs(Mathf.Round(Player.main.GetDepth()))} meters deep)";
                     }
                     else
                     {
@@ -111,9 +107,9 @@ namespace DiscordRPCBepInEx
                         {
                             activity.State = "In Land";
                         }
-                    }  
+                    }
                 }
-                
+
                 UpdateActivity(activity);
             }
         }
@@ -121,7 +117,6 @@ namespace DiscordRPCBepInEx
         private void UpdateState()
         {
             currScene = SceneManager.GetActiveScene().name;
-            Debug.Log(currScene);
             if (currScene.ToLower().Contains("startscreen"))
             {
                 sceneState = SceneState.Menu;
@@ -130,6 +125,7 @@ namespace DiscordRPCBepInEx
             {
                 sceneState = SceneState.InGame;
             }
+
         }
 
 
@@ -147,6 +143,11 @@ namespace DiscordRPCBepInEx
                     
                 }
             });
+        }
+
+        private void OnDisable()
+        {
+            discord.Dispose();
         }
 
         public Discord.Discord discord;

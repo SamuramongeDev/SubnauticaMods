@@ -4,6 +4,9 @@ using BepInEx.Logging;
 using System.Reflection;
 using System;
 using System.Diagnostics;
+using Discord;
+using UnityEngine.SceneManagement;
+using UnityEngine;
 
 namespace DiscordRPCBepInEx
 {
@@ -18,13 +21,15 @@ namespace DiscordRPCBepInEx
 
         private static ManualLogSource logSource;
 
+        private static bool oneTime = false;
+
         private void Awake()
         {
+            
             Logger.LogInfo("Patching DiscordRPC...");
             try
             {
                 harmony.PatchAll(Assembly.GetExecutingAssembly());
-                DiscordController.Load();
 
                 Logger.LogInfo("Patched succesfully!");
             }
@@ -38,7 +43,16 @@ namespace DiscordRPCBepInEx
                 Logger.LogWarning($"Exception Line: {line}");
 
             }
-            logSource = Logger;
+
+        }
+
+        private void Update()
+        {
+            if (!oneTime)
+            {
+                gameObject.AddComponent<DiscordController>();
+                oneTime = true;
+            }
         }
     }
 }

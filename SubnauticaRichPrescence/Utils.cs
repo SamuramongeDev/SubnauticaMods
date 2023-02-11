@@ -32,7 +32,7 @@ namespace DiscordRPCBepInEx
                     return subs;
                 }  
             }
-            return "None";
+            return "placeholder";
         }
 
         public static string GetBiomeDisplayName(string biomereference)
@@ -44,18 +44,18 @@ namespace DiscordRPCBepInEx
                     return valuePair.Value;
                 }
             }
-            return string.Empty;
+            return "Void";
         }
 
 
         public static string[] vehicleReferences = new string[3]
         {
-            "cyclopssmall",
-            "prawnsmall",
-            "seamothsmall"
+            "cyclops",
+            "prawn",
+            "seamoth"
         };
 
-        public static string[] biomesReferences = new string[19]
+        public static string[] biomesReferences = new string[20]
         {
             "safeshallows",
             "kelpforest",
@@ -76,6 +76,7 @@ namespace DiscordRPCBepInEx
             "seatrader",
             "jellyshroomcaves",
             "bloodkelp",
+            "lifepod"
         };
 
         public static Dictionary<string, string> biomeDisplays = new Dictionary<string, string>()
@@ -87,7 +88,8 @@ namespace DiscordRPCBepInEx
             { "sparsereef", "Sparse Reef" },
             { "grandreef", "Grand Reef" },
             { "dunes", "Dunes" },
-            { "crash", "Crash Zone" },
+            { "crashzone", "Crash Zone" },
+            { "crashedship", "Crash Zone"},
             { "koosh", "Koosh Zone" },
             { "lava", "Lava Zone" },
             { "lostriver", "Lost River" },
@@ -98,7 +100,8 @@ namespace DiscordRPCBepInEx
             { "mountains", "Mountains" },
             { "seatrader", "Sea Traders Path" },
             { "jellyshroomcaves", "Jellyshroom Caves" },
-            { "bloodkelp", "Blood Kelp" }
+            { "bloodkelp", "Blood Kelp" },
+            { "lifepod", "Lifepod" }
         };
     }
 }
